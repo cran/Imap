@@ -16,8 +16,8 @@ control over the color of the lines, the color of the polygon fill, and the aspe
 \tabular{ll}{
 Package: \tab IMAP\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2009-12-18\cr
+Version: \tab 1.01\cr
+Date: \tab 2009-12-21\cr
 License: \tab GPL (>= 2)\cr
 LazyLoad: \tab yes\cr
 }
@@ -32,7 +32,7 @@ somewhere in the figure region) will zoom out.  Double left clicking on the same
 will reset the plot.  Right click to stop.
 }
 \author{
-John R. Wallace: Imap.for.R@gmail.com (Limited support.)
+John R. Wallace: \email{Imap.for.R@gmail.com} (Limited support)
 }
 \examples{
     #	See examples under the main 'imap() function.

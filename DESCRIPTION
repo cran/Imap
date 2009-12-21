@@ -1,8 +1,8 @@
 Package: Imap
 Type: Package
 Title: Interactive Mapping
-Version: 1.0
-Date: 2009-10-28
+Version: 1.01
+Date: 2009-12-21
 Author: John R. Wallace <Imap.for.R@gmail.com>
 Maintainer: John R. Wallace <Imap.for.R@gmail.com>
 Depends: R (>= 2.10.0)
@@ -10,6 +10,6 @@ Description: Zoom in and out of maps or any supplied lines or points,
         with control for color, poly fill, and aspect.
 License: GPL (>= 2)
 LazyLoad: yes
-Packaged: 2009-12-18 16:46:08 UTC; john wallace
+Packaged: 2009-12-21 16:27:06 UTC; john wallace
 Repository: CRAN
-Date/Publication: 2009-12-18 16:50:51
+Date/Publication: 2009-12-21 17:42:58

@@ -4,7 +4,7 @@
 \alias{inside.polygon}
 \alias{col.alpha}
 \title{
-Select Points on a Figure.
+Select Points on a Figure
 }
 \description{
 Select points either inside or outside a polygon drawn on a figure.
@@ -58,10 +58,10 @@ The inside.polygon() function is revised from the the function "Inside()" by Jos
 See <http://www.biostat.wustl.edu/archives/html/s-news/2002-07/msg00020.html> .
 }
 \author{
-John R. Wallace: Imap.for.R@gmail.com (Limited support.)
+John R. Wallace: \email{Imap.for.R@gmail.com} (Limited support)
 }
 \seealso{
-imap, polygon
+\code{\link{imap}}, \code{\link{polygon}}
 }
 \examples{
 \dontrun{

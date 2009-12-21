@@ -95,14 +95,14 @@ the object given to 'longlat'). Each primary item has the following components.
 \item{poly}{The polygon color (or NA) for the polygon of this primary item.}
 }
 \author{
-John R. Wallace: Imap.for.R@gmail.com (Limited support.)
+John R. Wallace: \email{Imap.for.R@gmail.com} (Limited support)
 }
 \seealso{
-imap.ll, select.lines, select.pts
+\code{\link{imap.ll}}, \code{\link{select.pts}}, \code{\link{world}}
 }
 \examples{
 \dontrun{
-        if(options()$device %in% "windows")
+        if(options()$device \%in\% "windows")
             windows.options(width=13, height=9)  # Set the window to be wider than high.
 
 	imap()  # On the figure, left click two corners of an area you would like to zoom in on.

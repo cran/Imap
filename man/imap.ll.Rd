@@ -2,7 +2,7 @@
 \alias{imap.ll}
 \alias{select.lines}
 \title{
-The Imap plotting function - usually called by imap().
+The Imap plotting function - usually called by imap()
 }
 \description{
 imap.ll() is the underlying mapping function that is called for each item in a list by imap().
@@ -77,9 +77,12 @@ Data contained only within the last area looked at is invisibly returned as a (n
 }
 
 \author{
-John R. Wallace: Imap.for.R@gmail.com (Limited support.)
+John R. Wallace: \email{Imap.for.R@gmail.com} (Limited support)
 }
 
+\seealso{
+\code{\link{imap}}, \code{\link{select.pts}}
+}
 
 \examples{
 \dontrun{
