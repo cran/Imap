@@ -10,8 +10,8 @@ Zoom in and out of maps or any supplied lines or points with control for color, 
 }
 \usage{
 imap(longlat = list(world.h.land, world.h.lake, world.h.island, world.h.pond.in.island, world.h.borders), 
-        longrange, latrange, zoom = TRUE, col = c("black", "blue", "forestgreen", "dodgerblue", "cyan", "magenta"), fill = TRUE, 
-        poly = c("grey40", "blue", "forestgreen", "dodgerblue", NA, NA), lwd = 1, keep.attr = FALSE, add.all = FALSE, bg = "grey81", tol = 0.05, ...)
+        longrange, latrange, zoom = TRUE, col = c("black", "blue", "forestgreen", "dodgerblue", "cyan"), fill = TRUE, 
+        poly = c("grey40", "blue", "forestgreen", "dodgerblue", NA), lwd = 1, keep.attr = TRUE, add.all = FALSE, bg = "grey81", tol = 0.05, ...)
 
 
 ilines(..., fill = FALSE, aspect = 2)
@@ -51,8 +51,8 @@ ipts(longlat = npacific, axes = 'std', ...)
      A single value or vector for the width of the lines. 
 }
   \item{keep.attr}{
-     Will the attributes of color, poly fill color, and line width be taken from the supplied list of lists (as returned by this function) or should
-     the supplied values be used.  Default is FALSE.
+     Will the attributes of line color, line width, and polygon fill color be taken from the supplied list of lists (as returned by this function) or should
+     the supplied values be used.  Default is TRUE. See the examples.
 }
   \item{add.all}{
      Should all the items in 'longlat' be added to the current plot.  Default is FALSE.
@@ -61,12 +61,12 @@ ipts(longlat = npacific, axes = 'std', ...)
      The background color. The default is "grey81".  The background color is not a value returned by this function.
 }
   \item{tol}{
-     The tolerance used when double left clicking on the same spot to reset the data.  If very low values of data are supplied or the zooming in is
+     The tolerance used when double left clicking on the same spot to reset the data.  If very low values of data are supplied or zooming in is
      extreme, this value may need to be lowered.  Default is 0.05 .
 }
   \item{\dots}{
-     Any extra arguments are checked the a 'plt.' prefix.  Any such argument will be applied to the plot() function, all others will be applied to the
-     lines() function. (For those looking to see how this was done, look at the top of the imap.ll() function and search on 'plot.dots' and 'lines.dots')
+     Any extra arguments are checked the 'plt.' prefix.  Any such argument will be applied to the plot() function, all others will be applied to the
+     lines() function. (For wanting to know how this was done, look at the top of the imap.ll() function and search on 'plot.dots' and 'lines.dots'.)
 }
   \item{aspect}{
      See the help for imap.ll() for information on the 'aspect' argument.
@@ -77,13 +77,13 @@ ipts(longlat = npacific, axes = 'std', ...)
 }
 \details{
 The functions ilines() calls imap() with the defaults for 'fill' and 'aspect' set to FALSE and 2, respectively.  The function ipts() calls imap() with a call to 
-'type' set to "p" for points not lines, 'axes' set to "std", and 'fill' set to FALSE. 
+'type' set to "p" for points, 'axes' set to "std", and 'fill' set to FALSE. 
 arguments.
 }
 \value{
-Polygons are often broken by zooming in, so saving the results invisibly returned by imap() is often best done for lines and points, but not with fill = TRUE.
+Polygons are often broken by zooming in, so saving the results invisibly returned by imap() is often best done for lines and points when fill = FALSE.
 However the 'poly' argument is saved for each item in the value returned.  The arguments 'longrange' and 'latrange' with 'zoom = FALSE' can be used to 
-return to a zoomed in area with polygon colors intact.  See an example of this in the Example Section below.
+return to a zoomed in area with polygon colors intact.  See the examples below.
 
 The value returned is a list of lists, where each item in the primary list is an item from the original list given to argument 'longlat' (or created from
 the object given to 'longlat'). Each primary item has the following components.
@@ -98,36 +98,45 @@ the object given to 'longlat'). Each primary item has the following components.
 John R. Wallace: \email{Imap.for.R@gmail.com} (Limited support)
 }
 \seealso{
-\code{\link{imap.ll}}, \code{\link{select.pts}}, \code{\link{world}}
+\code{\link{imap.ll}}, \code{\link{select.pts}}, \code{\link{world}}, \code{\link{gdist}}
 }
 \examples{
 \dontrun{
-        if(options()$device \%in\% "windows")
+        if(.Platform$OS.type == "windows")
             windows.options(width=13, height=9)  # Set the window to be wider than high.
 
-	imap()  # On the figure, left click two corners of an area you would like to zoom in on.
-                # Creating a rectangle outside the figure region will zoom out or move the .
-                # Double left click on the same spot to zoom back out to the original data; right click to stop.
+	imap()  # On the figure, left-click two corners of an area you would like to zoom in on.
+                # Creating a rectangle outside the figure region will zoom out locally.
+                # Double left-click on the same spot to zoom back out to the original data. Right-click to stop.
                  
-        imap(antarctic = TRUE)
+        imap(antarctic = TRUE)  # Reset with two left-clicks in the same spot for a more symmetrical picture.
 
 	imap(list(world.h.land, imap(world.h.land)[[1]]$ll))  # Whatever area is selected in the first use of imap()
                                                               # will be a different color in the second imap().
 
-        col.alpha('magenta', alpha = 0.5)  # Find a color value for magenta that has an alpha transparency value of 0.5 .
+        col.alpha('magenta', alpha = 0.5)  # Look at the color value for magenta that has an alpha transparency value of 0.5 .
 
-	# Use that value below so there is transparency where rivers and borders are the same.
-
+	# Use this color so there is transparency where rivers and borders are the in the same location.
+        # Also note that the land was made a lighter grey by going from grey40 to grey50.
         imap(list(world.h.land, world.h.lake, world.h.island, world.h.pond.in.island, world.h.borders, world.h.rivers),
-              col=c("black", "blue",  "lightgoldenrod2", "skyblue1", "cyan", "#FF00FF80"))
-
-        ilines.test <- ilines(list(npacific, select.lines(ilines(npacific)[[1]]$ll)))
-	ilines(ilines.test, col=c("black", "transparent"))
+            longrange = c(-89, -99), latrange = c(41, 50), col=c("black", "blue",  "lightgoldenrod2", "skyblue1",
+            "cyan", col.alpha('magenta', alpha = 0.5)), poly = c("grey50", "blue", "forestgreen", "dodgerblue", NA, NA), zoom = FALSE)
+        
+        # All the world's rivers with zoom turned back on (may take a while to finish).
+        imap(list(world.h.land, world.h.lake, world.h.island, world.h.pond.in.island, world.h.borders, world.h.rivers),
+            col=c("black", "blue",  "lightgoldenrod2", "skyblue1", "cyan", col.alpha('magenta', alpha = 0.5)), 
+            poly = c("grey50", "blue", "forestgreen", "dodgerblue", NA, NA))
+ 
+        test <- ilines(list(npacific, select.lines(ilines(npacific)[[1]]$ll))) # Zoom, right-click, select one or more lines, right-click.
+	test[[2]]$lwd <- 3                                                     # Change attributes manually and
+        ilines(test)                                                           # keep the default keep.attr = TRUE, or
+        test <- ilines(test, col=c("magenta", "goldenrod"), lwd = c(2,5), keep.attr = FALSE)  # set keep.attr = FALSE and use parameter options.
 
         imap(longrange = c(-84.5, -81), latrange = c(44.5, 47)) # An example of ponds on an island in the Great Lakes Region.
-                                                                # Use zoom = F for a static map to add additional data to.
+                                                                # Use zoom = F for a static map, to which additional data may be added.
 
-	# Use with 'Maps' library	
+	
+        # Use with 'Maps' library	
         require(maps)
         require(mapproj)   
 
@@ -135,8 +144,6 @@ John R. Wallace: \email{Imap.for.R@gmail.com} (Limited support)
           
              matrix(cbind(map.list[[1]], map.list[[2]]), ncol = 2)
         }
-     
-
  
 	# Compare this map
 	imap(map.to.imap(map('usa')))

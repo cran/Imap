@@ -30,7 +30,7 @@ Hemisphere being negative numbers. The latitude is in the second column with lin
 \details{
 All the GSHHS files are available: land, lake, island, pond.in.island, rivers, borders with either 'world.h' or 'world.f' prefix.
 
-The 'npacific' dataset is a small matrix of the North Pacific coastline used in some examples involving lines (not polygons).
+The 'npacific' dataset is a small matrix of the Northern Pacific coastline used in some examples involving lines (not polygons).
 }
 \source{
 http://www.soest.hawaii.edu/wessel/gshhs/gshhs.html
@@ -44,8 +44,7 @@ Wessel, P. and Smith, W.H.F., 1996. A global, self-consistent, hierarchical, hig
 
 imap(list(world.h.land, world.h.lake, world.h.island, world.h.pond.in.island, world.h.rivers))
 
-imap.world <-
-function (x = 1:20, poly = rainbow(n), ...) 
+imap.world <- function (x = 1:20, poly = rainbow(n), ...) 
 {
     
     n <- length(x)

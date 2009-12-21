@@ -1,7 +1,7 @@
 imap <-
 function (longlat = list(world.h.land, world.h.lake, world.h.island, world.h.pond.in.island, world.h.borders), 
-    longrange, latrange, zoom = TRUE, col= c("black", "blue", "forestgreen", "dodgerblue", "cyan", "magenta"), fill = TRUE, 
-    poly = c("grey40", "blue", "forestgreen", "dodgerblue", NA, NA), lwd = 1, keep.attr = FALSE, add.all = FALSE, bg = "grey81", tol = 0.05, ...) 
+    longrange, latrange, zoom = TRUE, col= c("black", "blue", "forestgreen", "dodgerblue", "cyan"), fill = TRUE, 
+    poly = c("grey40", "blue", "forestgreen", "dodgerblue", NA), lwd = 1, keep.attr = TRUE, add.all = FALSE, bg = "grey81", tol = 0.05, ...) 
 {
     par(bg = bg)
 
