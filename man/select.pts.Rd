@@ -11,7 +11,7 @@ Select points; draw polygons; draw lines
 Functions for selecting points and drawing polygons and lines.
 }
 \usage{
-select.pts(pts, outside.poly = FALSE, col = "blue", alpha = 0.5, lty = 1, ...)
+select.pts(pts,  list.of.lists.obj = 1, outside.poly = FALSE, col = "blue", alpha = 0.5, lty = 1, ...)
 
 draw.polygon(col = "blue", alpha = 0.5, lty = 1, ...)
 
@@ -24,6 +24,11 @@ col.alpha(col, alpha = 0.5)
 \arguments{
   \item{pts}{
 A (n x 2) matrix of points.
+}
+  \item{list.of.lists.obj}{
+Which object in the list of lists, as returned by imap(), should be used to select points from.  Objects with no selected points 
+are dropped by imap() and therefore using str() on the value returned by imap() can be useful in revealing which object number is 
+wanted when, for example, islands or ponds on islands are to be selected.
 }
   \item{outside.poly}{
 Should the points which are outside the polygon be selected. The default is FALSE, which gives the points inside the polygon.
@@ -61,10 +66,14 @@ The function select.pts() explicitly returns a (n x 2) data frame of the values 
 }
 \references{
 The inside.polygon() function is revised from the the function "Inside()" by Joseph S. Verducci (Snews: 09 Feb 1999). 
-See  \url{http://www.biostat.wustl.edu/archives/html/s-news/2002-07/msg00020.html}
+In particular, exactly equal adjacent x values will cause the original function to fail.
+See  \url{http://www.biostat.wustl.edu/archives/html/s-news/2002-07/msg00020.html} 
 }
 \author{
 John R. Wallace: \email{Imap.for.R@gmail.com} (Limited support)
+}
+\note{
+If points inside a polygon were not selected try again with a less irregular polygon.
 }
 \seealso{
 \code{\link{imap}}, \code{\link{gdist.total}}, \code{\link{polygon}}
@@ -75,7 +84,7 @@ John R. Wallace: \email{Imap.for.R@gmail.com} (Limited support)
 plot(tmp <- cbind(1:100, rnorm(100)))
 select.pts(tmp) # Left-click three or more times, right-click to stop.
 
-big.island <- select.pts(imap()[[1]]$ll)  # Zoom into the Hawaiian Islands, right-click to stop, then put a polygon around the Big Island.
+big.island <- select.pts(imap())  # Zoom into the Hawaiian Islands, right-click to stop, then put a polygon around the Big Island.
 imap(list(world.h.land, big.island))  # Re-zoom into the Hawaiian Islands.  Use ilines() if a line was selected which is not a polygon.
 
 imap()  # Zoom in to an area, right-click to stop.

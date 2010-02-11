@@ -87,7 +87,11 @@ John R. Wallace: \email{Imap.for.R@gmail.com} (Limited support)
 \examples{
 \dontrun{
 
-ilines(list(npacific, select.lines(npacific)))  # Select one or more line seqments.
+ilines(list(npacific, select.lines(npacific)))  # Select one or more line seqments with left-click(s) and then a right-click to stop.
+ 
+Africa <- select.lines(world.h.land) # Select the African polygon.
+imap(zoom = FALSE)
+imap(Africa, poly = 'purple', add = T, zoom = FALSE)
 
 }
 }

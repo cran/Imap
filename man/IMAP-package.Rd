@@ -16,8 +16,8 @@ control over the color and width of the lines, the color of the polygon fill, an
 \tabular{ll}{
 Package: \tab IMAP\cr
 Type: \tab Package\cr
-Version: \tab 1.30\cr
-Date: \tab 2010-01-08\cr
+Version: \tab 1.32\cr
+Date: \tab 2010-02-011\cr
 License: \tab GPL (>= 2)\cr
 LazyLoad: \tab yes\cr
 }

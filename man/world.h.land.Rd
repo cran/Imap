@@ -17,12 +17,15 @@ with the Imap package, the full resolution is available on the internet by using
 
 > browseURL("http://imap-for-r.googlecode.com/files/world.f.for.R.GSHHS.Ver.2.Dec.2009.dmp")								
 
-> load(choose.files(getwd(), "Find and load the file world.f.for.R.GSHHS.Ver.2.Dec.2009.dmp'"))
+> load(choose.files(getwd(), "Find and load the file world.f.for.R.GSHHS.Ver.2.Dec.2009.dmp"))
+
+Or without choose.files(), where 'saved.path' is the path where the file was saved:
+
+> load("/saved.path/world.f.for.R.GSHHS.Ver.2.Dec.2009.dmp")
 
 The full resolution will not work well on low-end computers. Start with 'ilines(world.f.land)' if there is a problem.
-Occasionally starting over with graphics.off() may also help.
+Occasionally starting over with graphics.off() or using gc() for garbage collection may also help.
 }
-\usage{world.h.land}
 \format{
 A (n x 2) matrix with line breaks created with a row of NA's. Longitude is in the first column with lines in the Western 
 Hemisphere being negative numbers. The latitude is in the second column with lines in the Southern Hemisphere being negative.
@@ -44,6 +47,13 @@ Wessel, P. and Smith, W.H.F., 1996. A global, self-consistent, hierarchical, hig
 
 imap(list(world.h.land, world.h.lake, world.h.island, world.h.pond.in.island, world.h.rivers))
 
+# The works with full resolution; high-end computers only.
+imap(list(world.f.land, world.f.lake, world.f.island, world.f.pond.in.island, world.f.borders, world.f.rivers),
+            col=c("black", "blue", "forestgreen", "dodgerblue", "cyan", col.alpha('magenta', alpha = 0.5)), 
+            poly = c("grey50", "blue", "forestgreen", "dodgerblue", NA, NA))
+
+
+# The function below will plot selected polygons from 'world.h.land'.
 imap.world <- function (x = 1:20, poly = rainbow(n), ...) 
 {
     
@@ -62,6 +72,8 @@ imap.world <- function (x = 1:20, poly = rainbow(n), ...)
 }
 
 imap.world()
+
+imap.world(c(5,4,30,50))
 
 }
 }

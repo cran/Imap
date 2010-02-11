@@ -21,6 +21,10 @@ inside.polygon <- function(pts, h)
 
 # compute slopes and intercepts of boundary lines
 
+        if(any(diff(h[,1]) == 0)) {
+           E  <- (2:nrow(h))[diff(h[,1]) == 0]
+           h[E, 1] <- h[E, 1] + E*1e-10 
+        }
 	b <- diff(h[, 2])/diff(h[, 1])
 	a <- diag(as.matrix(h[1:k,  ]) %*% as.matrix(t(cbind( - b, 1))))
 	

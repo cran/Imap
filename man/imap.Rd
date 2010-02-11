@@ -119,12 +119,12 @@ John R. Wallace: \email{Imap.for.R@gmail.com} (Limited support)
 	# Use this color so there is transparency where rivers and borders are the in the same location.
         # Also note that the land was made a lighter grey by going from grey40 to grey50.
         imap(list(world.h.land, world.h.lake, world.h.island, world.h.pond.in.island, world.h.borders, world.h.rivers),
-            longrange = c(-89, -99), latrange = c(41, 50), col=c("black", "blue",  "lightgoldenrod2", "skyblue1",
+            longrange = c(-89, -99), latrange = c(41, 50), col=c("black", "blue",  "forestgreen", "dodgerblue",
             "cyan", col.alpha('magenta', alpha = 0.5)), poly = c("grey50", "blue", "forestgreen", "dodgerblue", NA, NA), zoom = FALSE)
         
         # All the world's rivers with zoom turned back on (may take a while to finish).
         imap(list(world.h.land, world.h.lake, world.h.island, world.h.pond.in.island, world.h.borders, world.h.rivers),
-            col=c("black", "blue",  "lightgoldenrod2", "skyblue1", "cyan", col.alpha('magenta', alpha = 0.5)), 
+            col=c("black", "blue", "forestgreen", "dodgerblue", "cyan", col.alpha('magenta', alpha = 0.5)), 
             poly = c("grey50", "blue", "forestgreen", "dodgerblue", NA, NA))
  
         test <- ilines(list(npacific, select.lines(ilines(npacific)[[1]]$ll))) # Zoom, right-click, select one or more lines, right-click.
@@ -134,6 +134,13 @@ John R. Wallace: \email{Imap.for.R@gmail.com} (Limited support)
 
         imap(longrange = c(-84.5, -81), latrange = c(44.5, 47)) # An example of ponds on an island in the Great Lakes Region.
                                                                 # Use zoom = F for a static map, to which additional data may be added.
+
+        # To create a file from a finished map use dev.copy2eps(), dev.copy2pdf(), or the following function for 'png'.
+        dev.copy2png <- function(file = 'Rplot.png', factor.exp = 1, ...) {
+
+        dev.copy(png, file=file, width=par()$fin[1] * factor.exp, height=par()$fin[2] * factor.exp, units="in", res=72, ...)
+        dev.off()
+        }
 
 	
         # Use with 'Maps' library	
